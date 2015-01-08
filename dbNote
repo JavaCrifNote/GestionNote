@@ -1,4 +1,4 @@
-create database dbNote DEFAULT CHARACTER SET latin1 COLLATE latin1_bin;
+create database dbNote;
 USE dbNote;
 
 create table if not exists eleve
