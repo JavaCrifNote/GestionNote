@@ -22,9 +22,6 @@ public class affichage extends HttpServlet{
     String urlAffichageEleve=null;
     String urlSimulationEleve=null;
     String urlErreur=null; 
-    String DSNeleve=null; 
-    String admeleve=null; 
-    String mdpeleve=null;
     MyConnexion impots=null;
     //-------- GET
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
@@ -42,7 +39,7 @@ public class affichage extends HttpServlet{
     request.setAttribute("simulations",simulations);
     
     // des attributs de la requête
-    String txtEleve=null;
+    //String txtEleve=null;
     // on récupère les paramètres de la requête
     String txtNom=request.getParameter("txtNom"); // Nom de l'élève
     if(txtNom==null) txtNom="";
@@ -88,11 +85,9 @@ public class affichage extends HttpServlet{
         ServletConfig config=getServletConfig();
         urlSimulationEleve=config.getInitParameter("urlSimulationEleve");
         urlErreur=config.getInitParameter("urlErreur");
-        DSNeleve=config.getInitParameter("DSNeleve");
-        admeleve=config.getInitParameter("admeleve");
-        mdpeleve=config.getInitParameter("mdpeleve");
+
         // paramètres ok ?
-        if(urlSimulationEleve==null || DSNeleve==null || admeleve==null || mdpeleve==null){ msgErreur="Configuration incorrecte"; return;
+        if(urlSimulationEleve==null){ msgErreur="Configuration incorrecte"; return;
         }
         // on crée une instance d'impotsJDBC
             try{

@@ -21,7 +21,7 @@
     
     <body>
         <h1>Ajouter une note</h1>
-        <form method="POST" action="gestionnote/getion">
+        <form method="POST" action="GestionNote/gestion">
         <table>
             <tr><td>Choisir un &eacute;tudiant</td><td>
                     
