@@ -15,7 +15,7 @@ import java.sql.SQLException;
  */
 public class MyConnexion {
     
-    private String url = "jdbc:mysql://localhost/dbimpots";
+    private String url = "jdbc:mysql://localhost/dbNote";
     private String user = "root";
     private String pass = "";
     
