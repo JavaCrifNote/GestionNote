@@ -92,7 +92,7 @@ else if(affichage.size()!=0){
 // résultats des simulations
 out.println("<h3>Affichage des élèves<h3>");
 out.println("<table \"border=\"1\">");
-out.println("<tr><td>Marié</td><td>Enfants</td><td>Salaire annuel (F)</td><td>Impôts à payer (F)</td></tr>");
+out.println("<tr><td>Français</td><td>Mathématique</td><td>Anglais</td><td>Histoire</td><td>Géographie</td></tr>");
 for(int i=0;i<affichage.size();i++){
 String[] simulation=(String[])affichage.get(i);
 out.println("<tr><td>"+simulation[0]+"</td><td>"+simulation[1]+"</td><td>"+simulation[2]+"</td><td>"+simulation[3]+"</td></tr>");

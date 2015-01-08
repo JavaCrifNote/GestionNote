@@ -1,5 +1,8 @@
 
 import java.io.*; 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 import java.util.regex.*; 
@@ -43,7 +46,7 @@ public class affichage extends HttpServlet{
     // on récupère les paramètres de la requête
     String txtNom=request.getParameter("txtNom"); // Nom de l'élève
     if(txtNom==null) txtNom="";
-    String txtPrenom=request.getParameter("txtPrenom"); // salaire annuel
+    String txtPrenom=request.getParameter("txtPrenom"); // Prénom de l'élève
     if(txtPrenom==null) txtPrenom="";
     // a-t-on tous les paramètres attendus
     if(txtNom==null || txtPrenom==null){
@@ -67,7 +70,15 @@ public class affichage extends HttpServlet{
             //txtImpots=""+impots.calculer(optMarie.equals("oui"),nbEnfants,salaire); 
             // on ajoute le résultat courant aux simulations précédentes
             //String[] simulation={optMarie.equals("oui") ? "oui" : "non",txtEnfants, txtSalaire, txtImpots};
-            //simulations.add(simulation);
+            //simulations.add(simulation);  
+            MyConnexion c=new MyConnexion();
+            Connection con=c.connect();
+             PreparedStatement stmp;
+             ResultSet results=null;
+             ArrayList<Integer> tabId_note=new ArrayList();
+             ArrayList<String> tabNom=new ArrayList();
+                
+                
             // la nouvelle valeur de simulations est remise dans la session
             session.setAttribute("simulations",simulations);
             }catch(Exception ex){}
