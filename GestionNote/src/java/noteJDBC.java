@@ -21,7 +21,7 @@ public class noteJDBC {
         PreparedStatement stmt;
         ResultSet results;
         try{
-            String query = "SELECT e.nom, e.prenom, e_m.note, m.nom FROM eleve as e INNER JOIN eleve_matiere as e_m INNER JOIN matiere as m ON e.id_eleve=e_m.id_eleve ON e_m.id_matiere=m.id_matiere WHERE e.nom=? AND e.prenom=? ";
+            String query = "SELECT e.nom, e.prenom, e_m.note, m.nom FROM eleve as e INNER JOIN (eleve_matiere as e_m INNER JOIN matiere as m ON m.id_matiere=e_m.id_matiere) ON e_m.id_eleve=e.id_eleve WHERE e.nom=? AND e.prenom=? ";
             //stmt = con.createStatement();
             stmt = con.prepareStatement(query);
             
