@@ -62,7 +62,7 @@ submit();
     </head>
     <body>
      <hr>
-<form name="frmImpots" action="/GestionNote/affichage" method="POST">
+<form  action="/GestionNote/affichage" method="POST">
     <table> <tr> <td>Nom :</td> 
     <td> <input type="text" size="5" name="txtNom" value="<%= txtNom %>"></td> </tr>
         <tr> <td>Prénom :</td> 
