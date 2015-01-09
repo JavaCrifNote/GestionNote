@@ -48,7 +48,7 @@ import java.util.*;
 
             <section id="content">
             <div id="main">
-                <h1>Ajouter une note</h1>
+                <h1>Recherche d'un étudiant</h1>
                     <form method="POST" action="GestionNote/gestion">
                     <table>
                         <tr><td>Choisir un &eacute;tudiant</td><td>
