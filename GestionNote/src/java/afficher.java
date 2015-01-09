@@ -109,7 +109,6 @@ public class afficher extends HttpServlet {
                 int statut=stmt.executeUpdate();
             }finally{
                 stmt.close();
-                
             }
             
         }catch(SQLException ex){
