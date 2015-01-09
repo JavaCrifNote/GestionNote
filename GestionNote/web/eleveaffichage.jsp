@@ -58,7 +58,7 @@ import java.util.*;
                    <option><%=nomtab.get(i)%>
                     <%}%>
                </select></td></tr>
-                        <tr><td></td><td><input type="text" name="note"></td></tr>
+
                         <tr><td></td><td><input type="button" name="submit" value="Valider"></td></tr>
                     </table>
                 </form>
