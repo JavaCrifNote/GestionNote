@@ -20,7 +20,7 @@ create table if not exists eleve_matiere
 (
    id_eleve                	 bigint(11)                    not null,
    id_matiere                bigint(11)                    not null,
-   note                      float(4,2)                	not null,	
+   note                      double                	not null,	
    constraint pk_eleve_matiere primary key (id_eleve, id_matiere),
    constraint fk_eleve foreign key (id_eleve) references eleve (id_eleve),
    constraint fk_matiere foreign key (id_matiere) references matiere (id_matiere)
