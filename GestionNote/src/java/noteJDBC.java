@@ -42,10 +42,86 @@ public class noteJDBC {
             }finally {stmt.close();}
         }catch(SQLException sqle){
             
-        }
-        
+        }     
         return listeEleve;
     }
     
-     
+    public void updateNote(Connection con, BeanNote bean){
+        try{
+            String query = "UPDATE note SET note=? WHERE id_eleve=? AND id_matiere=?";
+            //Statement stmt = con.createStatement();
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            //Binding des paramètres
+            //Décortiquage du bean
+            String note = bean.getNote();          
+            //int eleve = bean.getEleve().getId_eleve();
+            //int matiere = bean.getMatiere().getId_matiere();
+            
+            //Settings du PreparedStatement
+            stmt.setString(1, note);
+            //stmt.setString(2, legende);
+            //stmt.setInt(3, id_news);
+            //stmt.setInt(3, categorie);
+            
+            try{
+                // int statut = stmt.executeUpdate(query);
+                int statut = stmt.executeUpdate();
+            }finally{stmt.close();}
+        }catch(SQLException sqle){
+            
+        } 
+    
+    }
+    
+    public void insertNote(Connection con, BeanNote bean){
+        try{
+            String query = "INSERT INTO eleve_matiere (id_eleve, id_matiere, note) VALUES (?,?,?)";
+            //Statement stmt = con.createStatement();
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            //Binding des paramètres
+            //Décortiquage du bean
+            int id_eleve = bean.getEleve().getId_eleve();
+            int id_matiere = bean.getMatiere().getId_matiere();
+            String note = bean.getNote();
+            
+            //Settings du PreparedStatement
+            stmt.setInt(1, id_eleve);
+            stmt.setInt(2, id_matiere);
+            stmt.setString(3, note);
+            
+            try{
+                //int statut = stmt.executeUpdate(query);
+                int statut = stmt.executeUpdate();
+            }finally{stmt.close();}
+        }catch(SQLException sqle){
+            
+        }
+    }
+    
+     public void deleteNote(Connection con, BeanNote bean){
+        try{
+            String query = "DELETE FROM note WHERE id_eleve=? and id_matiere=?";
+            //Statement stmt = con.createStatement();
+            PreparedStatement stmt = con.prepareStatement(query);
+            
+            //Binding des paramètres
+            //Décortiquage du bean
+            int id_eleve = bean.getEleve().getId_eleve();
+            int id_matiere = bean.getMatiere().getId_matiere();
+            
+            //Settings du PreparedStatement
+            stmt.setInt(1, id_eleve);
+            stmt.setInt(2, id_matiere);
+            
+            try{
+                // int statut = stmt.executeUpdate(query);
+                int statut = stmt.executeUpdate();
+            }finally{stmt.close();}
+        }catch(SQLException sqle){
+            
+        }
+    }
+    
 }
