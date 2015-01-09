@@ -12,6 +12,7 @@
      idtab=(ArrayList)request.getAttribute("id_eleves");
      ArrayList<String> nomtab=new ArrayList();
      nomtab=(ArrayList)request.getAttribute("noms");
+     ArrayList notes=(ArrayList)request.getAttribute("notes");
 %>
 
 import java.io.*; 
@@ -66,6 +67,20 @@ import java.util.*;
             </div>
             </section>
 
+               
+              <% if(notes.size()!=0){
+                // résultats des simulations
+                out.println("<h3>Affichage des notes<h3>");
+                out.println("<table \"border=\"1\">");
+                out.println("<tr><td>Français</td><td>Mathématique</td><td>Anglais</td><td>Histoire</td><td>Géographie</td></tr>");
+                for(int i=0;i<notes.size();i++){
+                String[] note=(String[])notes.get(i);
+                out.println("<tr><td>"+note[0]+"</td><td>"+note[1]+"</td><td>"+note[2]+"</td><td>"+note[3]+"</td></tr>");
+                }
+                out.println("</table>");
+                }
+             
+                %>
             <!--Footer-->
 
             <footer>
