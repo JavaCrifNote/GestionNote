@@ -8,10 +8,10 @@
 
 <%
 // on récupère les attributs passés par la servlet principale
-String txtNom=(String)request.getAttribute("txtNom");
-String txtPrenom=(String)request.getAttribute("txtPrenom");
-ArrayList erreurs=(ArrayList)request.getAttribute("erreurs");
-ArrayList affichage=(ArrayList)request.getAttribute("affichage");
+     ArrayList<Integer> idtab=new ArrayList();
+     idtab=(ArrayList)request.getAttribute("id_eleves");
+     ArrayList<String> nomtab=new ArrayList();
+     nomtab=(ArrayList)request.getAttribute("noms");
 %>
 
 import java.io.*; 
@@ -23,82 +23,56 @@ import java.util.*;
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    
-    <script language="JavaScript" type="text/javascript">
-function effacer(){
-// raz du formulaire
-with(document.frmImpots){
-txtNom.value="";
-txtPrenom.value="";
-}//with
-}//effacer
-function calculer(){
-// vérification des paramètres avant de les envoyer au serveur
-with(document.frmImpots){
-//nbre d'enfants
-champs=/^\s*(\d+)\s*$/.exec(txtNom.value);
-if(champs==null){
-// le modéle n'est pas vérifié
-alert("Le nom est incorrect");
-nbEnfants.focus();
-return;
-}//if
-//salaire
-champs=/^\s*(\d+)\s*$/.exec(txtPrenom.value);
-if(champs==null){
-// le modéle n'est pas vérifié
-alert("Le prénom est incorrect");
-salaire.focus();
-return;
-}//if
-// c'est bon - on envoie le formulaire au serveur
-submit();
-}//with
-}//calculer
-</script> 
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Affichage d'élèves</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <title>Ajouter Note</title>
     </head>
+    
     <body>
-     <hr>
-<form  action="/GestionNote/affichage" method="POST">
-    <table> <tr> <td>Nom :</td> 
-    <td> <input type="text" size="5" name="txtNom" value="<%= txtNom %>"></td> </tr>
-        <tr> <td>Prénom :</td> 
-    <td> <input type="text" size="5" name="txtPrenom" value="<%= txtPrenom %>"></td> </tr>
-    <tr> 
-    <td><input type="button" value="Recherche" onclick="calculer()"></td> 
-    <td><input type="button" value="Effacer" onclick="effacer()"></td> 
-    </tr>         
-        </table> 
-</form>
+        <div id="global">
+
+            <header>        
+            <h1>Gestion note</h1>          
+            </header>
+
+            <nav>
+            <a href="affichage"><p>Afficher
+            </p></a><a href="gestion"><p>Ajouter
+            </p></a><a href="modifier"><p>Modifier
+            </p></a><a href="supprimer"><p>Supprimer
+            </p></a>
+            </nav>
+
+            <!--Contenu principal-->
+
+            <section id="content">
+            <div id="main">
+                <h1>Ajouter une note</h1>
+                    <form method="POST" action="GestionNote/gestion">
+                    <table>
+                        <tr><td>Choisir un &eacute;tudiant</td><td>
+
+               <select name="etud" size="1">
+                   <%for(int i=0;i<nomtab.size();i++){%>
+                   <option><%=nomtab.get(i)%>
+                    <%}%>
+               </select></td></tr>
+                        <tr><td></td><td><input type="text" name="note"></td></tr>
+                        <tr><td></td><td><input type="button" name="submit" value="Valider"></td></tr>
+                    </table>
+                </form>
+
+            </div>
+            </section>
+
+            <!--Footer-->
+
+            <footer>
+            
+            </footer>
+
+            </div>
         
-<%
-// y-a-t-il des erreurs
-if(erreurs!=null){
-// affichage des erreurs
-out.println("<hr>");
-out.println("<font color=\"red\">");
-out.println("Les erreurs suivantes se sont produites<br>");
-out.println("<ul>");
-for(int i=0;i<erreurs.size();i++){
-out.println("<li>"+(String)erreurs.get(i));
-}
-out.println("</ul>");
-out.println("</font>");
-}
-else if(affichage.size()!=0){
-// résultats des simulations
-out.println("<h3>Affichage des élèves<h3>");
-out.println("<table \"border=\"1\">");
-out.println("<tr><td>Français</td><td>Mathématique</td><td>Anglais</td><td>Histoire</td><td>Géographie</td></tr>");
-for(int i=0;i<affichage.size();i++){
-String[] simulation=(String[])affichage.get(i);
-out.println("<tr><td>"+simulation[0]+"</td><td>"+simulation[1]+"</td><td>"+simulation[2]+"</td><td>"+simulation[3]+"</td></tr>");
-}
-out.println("</table>");
-}
-%>
     </body>
 </html>
