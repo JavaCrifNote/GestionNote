@@ -31,54 +31,18 @@ public class affichage extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
         // l'initialisation s'est-elle bien passée ?
     if(msgErreur!=null){
-    // on passe la main à la page d'erreur
-    request.setAttribute("msgErreur",msgErreur);
-    getServletContext().getRequestDispatcher(urlErreur).forward(request,response);
+        // on passe la main à la page d'erreur 
+        request.setAttribute("msgErreur",msgErreur); 
+        
+        getServletContext().getRequestDispatcher(urlErreur).forward(request,response);
         }
-    // on récupère les simulations précédentes de la session
-    HttpSession session=request.getSession();
-    ArrayList simulations=(ArrayList)session.getAttribute("simulations");
-    if(simulations==null) simulations=new ArrayList();
-    // on met les simulations dans la requête courante
-    request.setAttribute("simulations",simulations);
-    
-    // des attributs de la requête
-    //String txtEleve=null;
-    // on récupère les paramètres de la requête
-    String txtNom=request.getParameter("txtNom"); // Nom de l'élève
-    if(txtNom==null) txtNom="";
-    String txtPrenom=request.getParameter("txtPrenom"); // Prénom de l'élève
-    if(txtPrenom==null) txtPrenom="";
-    // a-t-on tous les paramètres attendus
-    if(txtNom==null || txtPrenom==null){
-    // il manque des paramètres
-
-    request.setAttribute("txtNom","");
-    request.setAttribute("txtPrenom","");
-
-    // on passe la main à l'url d'affichage de l'impôt
-    getServletContext().getRequestDispatcher(urlSimulationEleve).forward(request,response);
-    }
-    // on a tous les paramètres - on les vérifie
-    ArrayList erreurs=new ArrayList();
-   
-    // s'il y a des erreurs, on les passe en attribut de la requête
-    if(erreurs.size()!=0){ request.setAttribute("erreurs",erreurs); txtNom=""; }else{
-        // on peut calculer l'impôt à payer
-            try{
-            //int nbEnfants=Integer.parseInt(txtEnfants);
-            //int salaire=Integer.parseInt(txtSalaire);
-            //txtImpots=""+impots.calculer(optMarie.equals("oui"),nbEnfants,salaire); 
-            // on ajoute le résultat courant aux simulations précédentes
-            //String[] simulation={optMarie.equals("oui") ? "oui" : "non",txtEnfants, txtSalaire, txtImpots};
-            //simulations.add(simulation);  
-            MyConnexion c=new MyConnexion();
-            Connection con=c.connect();
-             PreparedStatement stmp;
-             ResultSet results=null;
-             ArrayList<Integer> tabId=new ArrayList();
-             ArrayList<String> tabNom=new ArrayList();
-             try{
+        MyConnexion c=new MyConnexion();
+       Connection con=c.connect();
+        PreparedStatement stmp;
+        ResultSet results=null;
+        ArrayList<Integer> tabId=new ArrayList();
+        ArrayList<String> tabNom=new ArrayList();
+        try{
             String query="SELECT * FROM eleve";
             stmp=con.prepareStatement(query);
             try{
@@ -98,22 +62,10 @@ public class affichage extends HttpServlet{
            System.out.println("Erreur Sql");
         }
         request.setAttribute("id_eleves",tabId);
-        request.setAttribute("noms",tabNom);
-        //Recupere les matieres
-        getMatiere(request,response);
-        ArrayList<Integer> idmatieres=new ArrayList();
-        ArrayList<Integer> nommatieres=new ArrayList();
-        idmatieres=(ArrayList)request.getAttribute("id_matieres");
-        nommatieres=(ArrayList)request.getAttribute("nomsMatieres");
-        request.setAttribute("id_matiere",idmatieres);
-        request.setAttribute("matiere",nommatieres);
-        getServletContext().getRequestDispatcher(urlSimulationEleve).forward(request,response);
+        request.setAttribute("noms",tabNom);        
                 
-                
-            // la nouvelle valeur de simulations est remise dans la session
-            session.setAttribute("simulations",simulations);
-            }catch(Exception ex){}
-    }
+    
+    
     // les autres attributs de la requête
     //if(optMarie.equals("oui")){ request.setAttribute("chkoui","checked"); request.setAttribute("chknon",""); }else{ request.setAttribute("chknon","checked"); request.setAttribute("chkoui",""); } request.setAttribute("txtEnfants",txtEnfants); request.setAttribute("txtSalaire",txtSalaire); request.setAttribute("txtImpots",txtImpots);
     // on passe la main à l'url d'affichage de l'impôt
@@ -138,37 +90,5 @@ public class affichage extends HttpServlet{
             msgErreur=ex.getMessage();
             }
         }
-    
-     public  void getMatiere(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
-            
-        MyConnexion c=new MyConnexion();
-       Connection con=c.connect();
-        PreparedStatement stmp;
-        ResultSet results=null;
-        ArrayList<Integer> tabId=new ArrayList();
-        ArrayList<String> tabNom=new ArrayList();
-        try{
-            String query="SELECT * FROM matiere";
-            stmp=con.prepareStatement(query);
-            try{
-                results=stmp.executeQuery();
-                try{
-                while(results.next()){
-                    tabId.add(results.getInt("id_matiere"));
-                    tabNom.add(results.getString("nom"));
-                }
-            }finally{
-                results.close();
-            }
-            }finally{
-                stmp.close();
-            }
-        }catch(SQLException e){
-           System.out.println("Erreur Sql");
-        }
-        request.setAttribute("id_matieres",tabId);
-        request.setAttribute("nomsMatieres",tabNom);
-        }
-     
      
 }
