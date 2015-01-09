@@ -3,6 +3,7 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.*; 
 import javax.servlet.http.*; 
 import java.util.regex.*; 
@@ -75,8 +76,38 @@ public class affichage extends HttpServlet{
             Connection con=c.connect();
              PreparedStatement stmp;
              ResultSet results=null;
-             ArrayList<Integer> tabId_note=new ArrayList();
+             ArrayList<Integer> tabId=new ArrayList();
              ArrayList<String> tabNom=new ArrayList();
+             try{
+            String query="SELECT * FROM eleve";
+            stmp=con.prepareStatement(query);
+            try{
+                results=stmp.executeQuery();
+                try{
+                while(results.next()){
+                    tabId.add(results.getInt("id_eleve"));
+                    tabNom.add(results.getString("nom"));
+                }
+            }finally{
+                results.close();
+            }
+            }finally{
+                stmp.close();
+            }
+        }catch(SQLException e){
+           System.out.println("Erreur Sql");
+        }
+        request.setAttribute("id_eleves",tabId);
+        request.setAttribute("noms",tabNom);
+        //Recupere les matieres
+        getMatiere(request,response);
+        ArrayList<Integer> idmatieres=new ArrayList();
+        ArrayList<Integer> nommatieres=new ArrayList();
+        idmatieres=(ArrayList)request.getAttribute("id_matieres");
+        nommatieres=(ArrayList)request.getAttribute("nomsMatieres");
+        request.setAttribute("id_matiere",idmatieres);
+        request.setAttribute("matiere",nommatieres);
+        getServletContext().getRequestDispatcher(urlSimulationEleve).forward(request,response);
                 
                 
             // la nouvelle valeur de simulations est remise dans la session
@@ -108,5 +139,36 @@ public class affichage extends HttpServlet{
             }
         }
     
-    
+     public  void getMatiere(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
+            
+        MyConnexion c=new MyConnexion();
+       Connection con=c.connect();
+        PreparedStatement stmp;
+        ResultSet results=null;
+        ArrayList<Integer> tabId=new ArrayList();
+        ArrayList<String> tabNom=new ArrayList();
+        try{
+            String query="SELECT * FROM matiere";
+            stmp=con.prepareStatement(query);
+            try{
+                results=stmp.executeQuery();
+                try{
+                while(results.next()){
+                    tabId.add(results.getInt("id_matiere"));
+                    tabNom.add(results.getString("nom"));
+                }
+            }finally{
+                results.close();
+            }
+            }finally{
+                stmp.close();
+            }
+        }catch(SQLException e){
+           System.out.println("Erreur Sql");
+        }
+        request.setAttribute("id_matieres",tabId);
+        request.setAttribute("nomsMatieres",tabNom);
+        }
+     
+     
 }
