@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,12 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author varvaridaniela
+ * @author Chi Nhan
  */
-@WebServlet(urlPatterns = {"/supprimer"})
+@WebServlet(urlPatterns = {"/afficher"})
 public class afficher extends HttpServlet {
 
-    
+    String msgErreur=null;
+    String urlErreur=null;
+    String urlaffichageNote=null;
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -67,7 +70,7 @@ public class afficher extends HttpServlet {
         }
         request.setAttribute("id_eleves",tabId);
         request.setAttribute("noms",tabNom);
-        request.getRequestDispatcher("modifierSupprimer.jsp").forward(request,response);
+        request.getRequestDispatcher("eleveaffichage.jsp").forward(request,response);
     }
 
     /**
@@ -117,4 +120,15 @@ public class afficher extends HttpServlet {
         }
         
     }
+    
+        public void init(){
+                // on recupere les parametres d'initialisation
+                ServletConfig config=getServletConfig(); 
+                urlaffichageNote=config.getInitParameter("urlaffichageNote");
+                // paramètres ok ?
+        if(urlaffichageNote==null ){
+        msgErreur="Configuration incorrecte";
+        return;
+        }
+            }
 }
