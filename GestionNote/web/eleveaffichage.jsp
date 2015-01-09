@@ -67,7 +67,6 @@ import java.util.*;
             </div>
             </section>
 
-               
               <% if(notes.size()!=0){
                 // résultats des notes
                 out.println("<h3>Affichage des notes<h3>");
