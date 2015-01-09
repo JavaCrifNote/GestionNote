@@ -11,23 +11,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 /**
  *
  * @author varvaridaniela
  */
-@WebServlet(urlPatterns = {"/gestion"})
-public class gestion extends HttpServlet {
+@WebServlet(urlPatterns = {"/insertNote"})
+public class insertNote extends HttpServlet {
 
-   
-    String msgErreur=null;
-    String urlErreur=null;
-    String urlgestionNote=null;
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -38,16 +36,9 @@ public class gestion extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-   
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        if(msgErreur!=null){
-        // on passe la main à la page d'erreur 
-        request.setAttribute("msgErreur",msgErreur); 
-        
-        getServletContext().getRequestDispatcher(urlErreur).forward(request,response);
-        }
         MyConnexion c=new MyConnexion();
        Connection con=c.connect();
         PreparedStatement stmp;
@@ -73,33 +64,26 @@ public class gestion extends HttpServlet {
         }catch(SQLException e){
            System.out.println("Erreur Sql");
         }
-        request.setAttribute("id_eleves",tabId);
-        request.setAttribute("noms",tabNom);
-        //Recupere les matieres
+         //Recupere les matieres
         getMatiere(request,response);
         ArrayList<Integer> idmatieres=new ArrayList();
         ArrayList<Integer> nommatieres=new ArrayList();
         idmatieres=(ArrayList)request.getAttribute("id_matieres");
         nommatieres=(ArrayList)request.getAttribute("nomsMatieres");
-        request.setAttribute("id_matiere",idmatieres);
-        request.setAttribute("matiere",nommatieres);
-        
             String nom1=request.getParameter("nometude");
             String nom2=request.getParameter("matiere");
             String note3=request.getParameter("note");
             if(nom1!=null&&nom2!=null&&note3!=null){
             //Update note
+                System.out.println("-------------------"+nom1+nom2+note3);
             updateNote(request,response,nommatieres,tabNom,nom1,nom2,note3);
         request.setAttribute("valider","La note a été ajouter");
          request.getRequestDispatcher("valider.jsp").forward(request,response);
          
-        }
         
-            getServletContext().getRequestDispatcher(urlgestionNote).forward(request,response);
-        
-      
-}       
-    
+    }
+    }
+
         public  void getMatiere(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
             
         MyConnexion c=new MyConnexion();
@@ -132,7 +116,7 @@ public class gestion extends HttpServlet {
         }
         
         public void updateNote(HttpServletRequest request, HttpServletResponse response,ArrayList matiere,ArrayList eleve,String nom1,String nom2, String note){
-               
+               System.out.println(nom1+nom2+matiere.get(0)+ eleve.get(0));
         MyConnexion c=new MyConnexion();
        Connection con=c.connect();
             try{
@@ -140,22 +124,25 @@ public class gestion extends HttpServlet {
             PreparedStatement stmt=con.prepareStatement(query);
             int id_matiere=0;
             int id_eleve=0;
-            int note1=Integer.parseInt(note);
+            double note1=Double.parseDouble(note);
             for(int i=0;i<matiere.size();i++){
-                if(nom2==matiere.get(i)){
-                    id_matiere=i;
+                System.out.println(nom2+"----------------"+matiere.get(i));
+                if(nom2.equals(matiere.get(i))){
+                    id_matiere=i+1;
+                   
                 }
             }
+            System.out.println("__________________"+id_matiere);
             for(int i=0;i<eleve.size();i++){
-                if(nom1==eleve.get(i)){
-                    id_eleve=i;
+                if(nom1.equals(eleve.get(i))){
+                    id_eleve=i+1;
                 }
             }
-            if(id_matiere!=0&&id_eleve!=0){
+            
             stmt.setInt(1,id_eleve);
             stmt.setInt(2,id_matiere);
-            stmt.setInt(3, note1);
-            }
+            stmt.setDouble(3, note1);
+            
             try{
                 int statut=stmt.executeUpdate();
             }finally{
@@ -165,6 +152,7 @@ public class gestion extends HttpServlet {
             
         }catch(SQLException ex){
             System.out.println("Erreur connexion insert");
+            ex.printStackTrace();
         }
         }
     /**
@@ -180,14 +168,5 @@ public class gestion extends HttpServlet {
             throws ServletException, IOException {
         doGet(request,response);
     }
-public void init(){
-        // on récupère les paramètres d'initialisation
-        ServletConfig config=getServletConfig(); 
-        urlgestionNote=config.getInitParameter("urlgestionNote");
-        // paramètres ok ?
-if(urlgestionNote==null ){
-msgErreur="Configuration incorrecte";
-return;
-}
-    }
+
 }
