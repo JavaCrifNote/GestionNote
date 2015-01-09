@@ -5,7 +5,7 @@
       <servlet-class>gestion</servlet-class>
       <init-param>
       <param-name>urlgestionNote</param-name>
-      <param-value>/eleveaffichage.jsp</param-value>
+      <param-value>/ajouterNote.jsp</param-value>
       </init-param>
     <init-param>
     <param-name>urlErreur</param-name>
