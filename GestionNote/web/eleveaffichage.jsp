@@ -69,7 +69,7 @@ import java.util.*;
 
                
               <% if(notes.size()!=0){
-                // résultats des simulations
+                // résultats des notes
                 out.println("<h3>Affichage des notes<h3>");
                 out.println("<table \"border=\"1\">");
                 out.println("<tr><td>Français</td><td>Mathématique</td><td>Anglais</td><td>Histoire</td><td>Géographie</td></tr>");
@@ -79,7 +79,6 @@ import java.util.*;
                 }
                 out.println("</table>");
                 }
-             
                 %>
             <!--Footer-->
 
