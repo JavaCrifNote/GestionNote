@@ -38,7 +38,7 @@
         <div id="main">
 
            <h1>Ajouter une note</h1>
-                <form method="post" action="/gestionnote/insertNote">
+                <form method="post" action="/GestionNote/insertNote">
                 <table>
                     <tr><td>Choisir un &eacute;tudiant</td><td>
 
