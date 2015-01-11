@@ -1,0 +1,20 @@
+L'application permet la gestion de note. L'utilisateur peut consulter, ajouter, modifier ou supprimer une note.
+
+L’utilisateur à accès à 3 pages grâce à un menu :
+-	Une qui permet d’afficher les notes et la moyenne en fonction du nom de l’élève.
+-	Une qui ajoute une note en fonction de l’élève et de la matière.
+-	Une qui permet de modifier ou supprimer une note en fonction de l’élève et de la matière.
+
+Les informations sont enregistrées dans une base de données MySQL.
+
+La base est composée de 3 tables :
+-	Une table eleve qui contient le nom et le prénom
+-	Une table matiere qui contient le nom
+-	Une table eleve_matiere qui contient la note et qui fait le lien entre la table élève et matière
+
+
+Installation :
+
+Il faut importer  le projet, voici le lien https://github.com/JavaCrifNote/GestionNote.git
+Il contient le programme et les .sql.
+Sur MySQL, il faut créer une base de donnes dbNote.
