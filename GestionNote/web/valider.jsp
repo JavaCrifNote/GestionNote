@@ -9,10 +9,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <title>Gestion Note</title>
     </head>
     <body>
-        <h1><%=reponse%></h1>
-        
+         <div id="global">
+
+        <header>     
+        <h1>Gestion note</h1>
+        </header>
+
+        <nav>
+        <a href="afficher"><p>Affichage
+        </p></a><a href="gestion"><p>Ajout
+        </p></a><a href=""><p>Modifier/Supprimer
+        </p></a>
+        </nav>
+
+        <!--Contenu principal-->
+
+        <section id="content">
+        <div id="main">
+           <h1><%=reponse%></h1>
+        </div>
+        </section>
+
+        <!--Footer-->
+
+        <footer>
+        </footer>
+
+        </div>    
     </body>
 </html>
