@@ -18,7 +18,7 @@
     </head>
     <body>
         <h1>Supprimer ou modifier</h1>
-        <form method="post" action="/gestionnote/supprimer">
+        <form method="post" action="/gestionnote/afficherNote">
         <table>
             <tr><td>Choisir un &eacute;tudiant</td><td>
                     
@@ -28,8 +28,7 @@
         <%}%>
    </select></td></tr>
             <tr><td></td><td><input type="submit" name="valider" value="Valider"></td></tr>
-            <tr><td></td><td><input type="submit" name="modifier" value="Modifier"></td></tr>
-            <tr><td></td><td><input type="submit" name="supprimer" value="Supprimer"></td></tr>
+           
         </table>
     </form>
     </body>
