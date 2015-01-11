@@ -5,15 +5,15 @@ insert into eleve values ('','Champs','Michel');
 insert into eleve values ('','Bob','Pierre');
 insert into eleve values ('','Grand','David');
 insert into eleve values ('','Nguyen','Chinhan');
-insert into eleve values ('','Dupont','Kevin');
+insert into eleve values ('','Marc','Kevin');
 insert into eleve values ('','Jean','Jacque');
 
 
 insert into matiere values ('','Français');
-insert into matiere values ('','Mathématique');
+insert into matiere values ('','Mathematique');
 insert into matiere values ('','Anglais');
 insert into matiere values ('','Histoire');
-insert into matiere values ('','Géographie');
+insert into matiere values ('','Geographie');
 
 insert into eleve_matiere values ('1','1','10');
 insert into eleve_matiere values ('1','2','2');
