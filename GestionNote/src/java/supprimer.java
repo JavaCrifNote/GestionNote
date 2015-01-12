@@ -125,9 +125,10 @@ public class supprimer extends HttpServlet {
              String query="UPDATE eleve_matiere SET note=? WHERE id_eleve=? AND id_matiere=? ";
              PreparedStatement stmt=con.prepareStatement(query);
              
-             stmt.setInt(1,idEleve);
-             stmt.setInt(2,idMatiere);
-             stmt.setDouble(3,note);
+             stmt.setDouble(1,note);
+             stmt.setInt(2,idEleve);
+             stmt.setInt(3,idMatiere);
+             
              try{
                  int status=stmt.executeUpdate();
                  System.out.println("Succes"+status);
