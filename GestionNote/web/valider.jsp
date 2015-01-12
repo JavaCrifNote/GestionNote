@@ -20,9 +20,9 @@
         </header>
 
         <nav>
-        <a href="afficher"><p>Affichage
+        <a href=""><p>Affichage
         </p></a><a href="gestion"><p>Ajout
-        </p></a><a href=""><p>Modifier/Supprimer
+        </p></a><a href="afficherEleve"><p>Modifier/Supprimer
         </p></a>
         </nav>
 
