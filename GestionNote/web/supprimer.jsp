@@ -18,11 +18,29 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <link rel="stylesheet" href="styles.css"/>
+        <title>modifier ou supprimer</title>
     </head>
     <body>
-        <h1>Supprimer ou modifier</h1>
-        <form method="post" action="/gestionnote/supprimer">
+         <div id="global">
+
+        <header>     
+        <h1>Gestion note</h1>
+        </header>
+
+        <nav>
+        <a href=""><p>Affichage
+        </p></a><a href="gestion"><p>Ajout
+        </p></a><a href="afficherEleve"><p>Modifier/Supprimer
+        </p></a>
+        </nav>
+
+        <!--Contenu principal-->
+
+        <section id="content">
+        <div id="main">
+              <h1>Supprimer ou modifier</h1>
+        <form method="post" action="/GestionNote/supprimer">
         <table>
             <tr><td>Nom etudiant :</td><td>
                 <td><input type="text" name="nom" value="<%=listnom%>"></td> </tr>      
@@ -43,5 +61,13 @@
        <%}%>
         </table>
         </form>
+        </div>
+        </section>
+
+        <!--Footer-->
+
+        <footer>
+        </footer>
+        </div> 
     </body>
 </html>
