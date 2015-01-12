@@ -13,9 +13,37 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>supprimer</servlet-name>
-        <servlet-class>afficher</servlet-class>
+        <servlet-name>afficherEleve</servlet-name>
+        <servlet-class>afficherEleve</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>supprimer</servlet-name>
+        <servlet-class>supprimer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>afficherNote</servlet-name>
+        <servlet-class>afficherNote</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>insertNote</servlet-name>
+        <servlet-class>insertNote</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>afficherEleve</servlet-name>
+        <url-pattern>/afficherEleve</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>supprimer</servlet-name>
+        <url-pattern>/supprimer</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>afficherNote</servlet-name>
+        <url-pattern>/afficherNote</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>insertNote</servlet-name>
+        <url-pattern>/insertNote</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>gestion</servlet-name>
         <url-pattern>/gestion</url-pattern>
