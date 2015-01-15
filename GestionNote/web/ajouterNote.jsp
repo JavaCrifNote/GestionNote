@@ -26,7 +26,7 @@
         </header>
 
         <nav>
-        <a href=""><p>Affichage
+        <a href="afficher"><p>Affichage
         </p></a><a href="gestion"><p>Ajout
         </p></a><a href="afficherEleve"><p>Modifier/Supprimer
         </p></a>

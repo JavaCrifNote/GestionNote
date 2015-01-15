@@ -1,8 +1,9 @@
 <%-- 
-    Document   : supprimer
-    Created on : 9 janv. 2015, 15:07:13
-    Author     : varvaridaniela
+    Document   : noteaffichage
+    Created on : 15 janv. 2015, 09:51:51
+    Author     : Chi Nhan
 --%>
+
 <%@page import="java.util.ArrayList"%>
 <%
     int nb=0;
@@ -19,7 +20,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="styles.css"/>
-        <title>modifier ou supprimer</title>
+        <title>Liste des notes</title>
     </head>
     <body>
          <div id="global">
@@ -39,7 +40,7 @@
 
         <section id="content">
         <div id="main">
-              <h1>Supprimer ou modifier</h1>
+              <h1>Note de l'étudiant</h1>
         <form method="post" action="/GestionNote/supprimer">
         <table>
             <tr><td>Nom etudiant :</td><td>
@@ -56,8 +57,6 @@
                
            </td>
      
-           <td><input type="submit" name="supprimer<%=i%>" value="Supprimer"> </td>
-           <td><input type="submit" name="modifier<%=i%>" value="Modifier"> </td></tr>
        <%}%>
         </table>
         </form>

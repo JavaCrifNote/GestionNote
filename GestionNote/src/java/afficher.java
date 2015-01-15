@@ -27,7 +27,7 @@ public class afficher extends HttpServlet {
 
     String msgErreur=null;
     String urlErreur=null;
-    String urlaffichageNote=null;
+
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -42,8 +42,8 @@ public class afficher extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        MyConnexion c=new MyConnexion();
-        Connection con=c.connect();
+         MyConnexion c=new MyConnexion();
+       Connection con=c.connect();
         PreparedStatement stmp;
         ResultSet results=null;
         ArrayList<Integer> tabId=new ArrayList();
@@ -87,48 +87,5 @@ public class afficher extends HttpServlet {
         doGet(request,response);
     }
 
-    public void afficherNote (HttpServletRequest request, HttpServletResponse response,ArrayList matiere,ArrayList eleve,String nom1){
-               System.out.println(nom1+matiere.get(0)+ eleve.get(0));
-        MyConnexion c=new MyConnexion();
-       Connection con=c.connect();
-            try{
-            String query="SELECT e.nom, e.prenom, e_m.note, m.nom FROM eleve as e INNER JOIN (eleve_matiere as e_m INNER JOIN matiere as m ON m.id_matiere=e_m.id_matiere) ON e_m.id_eleve=e.id_eleve WHERE e.nom=?";
-            PreparedStatement stmt=con.prepareStatement(query);
-            int id_matiere=0;
-            int id_eleve=0;
-            
-            System.out.println("__________________"+id_matiere);
-            for(int i=0;i<eleve.size();i++){
-                if(nom1.equals(eleve.get(i))){
-                    id_eleve=i+1;
-                }
-            }
-            
-            stmt.setInt(1,id_eleve);
-            stmt.setInt(2,id_matiere);
- 
-            
-            try{
-                int statut=stmt.executeUpdate();
-            }finally{
-                stmt.close();
-            }
-            
-        }catch(SQLException ex){
-            System.out.println("Erreur connexion insert");
-            ex.printStackTrace();
-        }
-        
-    }
     
-        public void init(){
-                // on recupere les parametres d'initialisation
-                ServletConfig config=getServletConfig(); 
-                urlaffichageNote=config.getInitParameter("urlaffichageNote");
-                // paramètres ok ?
-        if(urlaffichageNote==null ){
-        msgErreur="Configuration incorrecte";
-        return;
-        }
-            }
 }

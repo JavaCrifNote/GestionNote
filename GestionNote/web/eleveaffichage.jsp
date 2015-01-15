@@ -15,11 +15,6 @@
      ArrayList notes=(ArrayList)request.getAttribute("notes");
 %>
 
-import java.io.*; 
-import javax.servlet.*; 
-import javax.servlet.http.*; 
-import java.util.regex.*; 
-import java.util.*;
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,54 +33,36 @@ import java.util.*;
             </header>
 
             <nav>
-            <a href="affichage"><p>Afficher
-            </p></a><a href="gestion"><p>Ajouter
-            </p></a><a href="modifier"><p>Modifier
-            </p></a><a href="supprimer"><p>Supprimer
+            <a href="afficher"><p>Affichage
+            </p></a><a href="gestion"><p>Ajout
+            </p></a><a href="afficherEleve"><p>Modifier/Supprimer
             </p></a>
             </nav>
 
             <!--Contenu principal-->
 
             <section id="content">
-            <div id="main">
-                <h1>Recherche d'un étudiant</h1>
-                    <form method="POST" action="GestionNote/gestion">
-                    <table>
-                        <tr><td>Choisir un &eacute;tudiant</td><td>
+        <div id="main">
+            <h1>Recherche d'un étudiant</h1>
+            <form method="post" action="/GestionNote/listeNote">
+            <table>
+                 <tr><td>Choisir un &eacute;tudiant</td><td>
 
-               <select name="etud" size="1">
-                   <%for(int i=0;i<nomtab.size();i++){%>
-                   <option><%=nomtab.get(i)%>
-                    <%}%>
-               </select></td></tr>
-                        
-                        <tr><td></td><td><input type="button" name="submit" value="Valider"></td></tr>
-                    </table>
-                </form>
+                <select name="nometude" size="1">
+                    <%for(int i=0;i<nomtab.size();i++){%>
+                    <option><%=nomtab.get(i)%>
+                     <%}%>
+                </select></td></tr>
+                 <tr><td></td><td><input type="submit" name="valider" value="Valider"></td></tr>
+             </table>
+         </form>
+        </div>
+        </section>
 
-            </div>
-            </section>
+        <!--Footer-->
 
-              <% if(notes.size()!=0){
-                // résultats des notes
-                out.println("<h3>Affichage des notes<h3>");
-                out.println("<table \"border=\"1\">");
-                out.println("<tr><td>Français</td><td>Mathématique</td><td>Anglais</td><td>Histoire</td><td>Géographie</td></tr>");
-                for(int i=0;i<notes.size();i++){
-                String[] note=(String[])notes.get(i);
-                out.println("<tr><td>"+note[0]+"</td><td>"+note[1]+"</td><td>"+note[2]+"</td><td>"+note[3]+"</td></tr>");
-                }
-                out.println("</table>");
-                }
-                %>
-            <!--Footer-->
-
-            <footer>
-            
-            </footer>
-
-            </div>
-        
+        <footer>
+        </footer>
+        </div>      
     </body>
 </html>
